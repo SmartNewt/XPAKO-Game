@@ -15,7 +15,7 @@ public class EnemyFollow : MonoBehaviour
     {
         player = GameObject.Find("MainChar");
         Vector3 pos = transform.position;
-        pos.z = 0;
+        pos.z = 1;
         transform.position = pos;
         rb = this.GetComponent<Rigidbody2D>();
     }
@@ -28,11 +28,6 @@ public class EnemyFollow : MonoBehaviour
         rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Destroy(gameObject);
     }
 
     private void FixedUpdate()
