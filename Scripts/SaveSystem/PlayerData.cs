@@ -7,10 +7,12 @@ public class PlayerData
 {
     public int health;
     public int level;
+    public int killed;
     public float[] position;
 
     public PlayerData(Player player)
     {
+        killed = player.killed;
         level = player.level;
         health = player.currentHealth;
 

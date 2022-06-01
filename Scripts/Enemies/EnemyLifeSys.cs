@@ -5,8 +5,13 @@ using UnityEngine;
 public class EnemyLifeSys : MonoBehaviour
 {
     public int hp = 3;
-
     private int damage;
+    private DeathManage dm;
+
+    void Awake()
+    {
+        dm = GameObject.FindObjectOfType<DeathManage>();
+    }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
@@ -17,6 +22,7 @@ public class EnemyLifeSys : MonoBehaviour
             if (damage == hp)
             {
                 Destroy(gameObject);
+                dm.IncreaseDeaths();
             }
         }
     }

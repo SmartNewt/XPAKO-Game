@@ -4,34 +4,42 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int Armor = 1;
-    public int level = 1;
-    public int BulletSpeed = 1;
-    public int CoolDown = 1;
+    public int maxHealth;
+    public int Armor;
+    public int level;
+    public int BulletSpeed;
+    public int CoolDown;
     public int currentHealth;
+    public int killed;
     public HealthBar healthBar;
+    public DeathManage dm;
 
-    // Start is called before the first frame update
-    private void Start()
+    void Awake()
     {
+        dm = GameObject.FindObjectOfType<DeathManage>();
+        Debug.Log(dm.deaths);
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(currentHealth);
+        LoadPlayer();
     }
+
+    private void Start() { }
 
     public void Update()
     {
-        void OnCollisionEnter2D(Collision2D other)
-        {
-            TakeDamage(10);
-        }
+        killed = dm.deaths;
+    }
 
-        void TakeDamage(int damage)
-        {
-            currentHealth -= damage;
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        TakeDamage(1);
+    }
 
-            healthBar.SetHealth(currentHealth);
-        }
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 
     public void SavePlayer()
@@ -45,6 +53,7 @@ public class Player : MonoBehaviour
 
         level = data.level;
         currentHealth = data.health;
+        killed = data.killed;
 
         Vector3 position;
         position.x = data.position[0];
