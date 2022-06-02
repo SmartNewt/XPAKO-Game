@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         dm = GameObject.FindObjectOfType<DeathManage>();
         Debug.Log(dm.deaths);
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(currentHealth);
+        healthBar.SetMaxHealth(maxHealth);
         LoadPlayer();
     }
 
@@ -28,6 +28,11 @@ public class Player : MonoBehaviour
     public void Update()
     {
         killed = dm.deaths;
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveSystem.SavePlayer(this);
     }
 
     void OnCollisionEnter2D(Collision2D other)
