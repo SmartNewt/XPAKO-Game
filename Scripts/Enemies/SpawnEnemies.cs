@@ -31,43 +31,57 @@ public class SpawnEnemies : MonoBehaviour
                         posSpawn = spawnPoints[randPoints].position;
                         posSpawn.z += incZ;
 
-                        GameObject enemy = Instantiate(enemyPrefabs[randEnemy], posSpawn, transform.rotation);
+                        GameObject enemy = Instantiate(
+                            enemyPrefabs[randEnemy],
+                            posSpawn,
+                            transform.rotation
+                        );
                         incZ++;
                     }
-                } else {
+                }
+                else
+                {
                     for (int i = 0; i < group; i++)
                     {
                         int randPoints = Random.Range(0, spawnPoints.Length);
                         posSpawn = spawnPoints[randPoints].position;
                         posSpawn.z += incZ;
 
-                        GameObject enemy = Instantiate(enemyPrefabs[0], posSpawn, transform.rotation);
+                        GameObject enemy = Instantiate(
+                            enemyPrefabs[0],
+                            posSpawn,
+                            transform.rotation
+                        );
                         incZ++;
                     }
                 }
 
                 tmp = 0;
-            } else {
+            }
+            else
+            {
                 tmp++;
             }
-
-        } else {
+        }
+        else
+        {
             if (tmp == TimeForSpawn)
             {
                 int rangeSP = spawnPoints.Length;
 
-                for (int i = 0; i < rangeSP ; i++)
+                for (int i = 0; i < rangeSP; i++)
                 {
                     posSpawn = spawnPoints[i].position;
                     posSpawn.z += incZ;
-                    Debug.Log(posSpawn.z);
-                    
+
                     GameObject enemy = Instantiate(enemyPrefabs[0], posSpawn, transform.rotation);
                     incZ++;
                 }
 
                 tmp = 0;
-            } else {
+            }
+            else
+            {
                 tmp++;
             }
         }
