@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
+        LoadPlayer();
         dm = GameObject.FindObjectOfType<DeathManage>();
         Debug.Log(dm.deaths);
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        LoadPlayer();
     }
 
     private void Start() { }
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
         killed = dm.deaths;
+        healthBar.SetHealth(currentHealth);
     }
 
     void OnApplicationQuit()
@@ -38,6 +39,14 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         TakeDamage(1);
+        if (currentHealth == 0 || currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        if (currentHealth > 101)
+        {
+            currentHealth = 100;
+        }
     }
 
     void TakeDamage(int damage)

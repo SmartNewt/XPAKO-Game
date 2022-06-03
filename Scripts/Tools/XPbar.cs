@@ -9,10 +9,15 @@ public class XPbar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     public DeathManage dm;
+    public Player player;
+    public ClickImage newwp;
+    public PauseMenu pause;
+    public GameObject objectToActivate;
 
     public int xp;
     public int killed;
-    public int i;
+    private int i;
+    private int a = 2;
     public int level = 1;
 
     public Text counterText;
@@ -20,6 +25,7 @@ public class XPbar : MonoBehaviour
     void Awake()
     {
         dm = GameObject.FindObjectOfType<DeathManage>();
+        player = GameObject.FindObjectOfType<Player>();
         SetMaxXP();
     }
 
@@ -28,6 +34,7 @@ public class XPbar : MonoBehaviour
         killed = dm.deaths;
         GainXP();
         SetXP();
+        NewStep();
         counterText.text = level.ToString();
     }
 
@@ -56,11 +63,23 @@ public class XPbar : MonoBehaviour
             {
                 xp = 0;
                 level++;
+                player.currentHealth += 25;
             }
         }
         if (i < killed)
         {
             i = killed + 1;
+        }
+    }
+
+    public void NewStep()
+    {
+        if (level == a)
+        {
+            Debug.Log("incroyable");
+            newwp.Red();
+            a++;
+            pause.Pause();
         }
     }
 }
