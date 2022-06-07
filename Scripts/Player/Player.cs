@@ -36,9 +36,13 @@ public class Player : MonoBehaviour
         SaveSystem.SavePlayer(this);
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        TakeDamage(1);
+        if (collisionInfo.gameObject.tag == "Enemy")
+        {
+            TakeDamage(1);
+        }
+
         if (currentHealth == 0 || currentHealth < 0)
         {
             currentHealth = 0;

@@ -15,7 +15,15 @@ public class EnemyLifeSys : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.collider.name == "Bullet(Clone)")
+        if (collisionInfo.gameObject.tag == "Player" || collisionInfo.gameObject.tag == "Bullet")
+        {
+            Physics2D.IgnoreCollision(
+                gameObject.GetComponent<Collider2D>(),
+                collisionInfo.gameObject.GetComponent<Collider2D>()
+            );
+        }
+
+        if (collisionInfo.gameObject.tag == "Bullet")
         {
             damage++;
 
