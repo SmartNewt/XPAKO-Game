@@ -11,13 +11,12 @@ public class XPbar : MonoBehaviour
     public DeathManage dm;
     public Player player;
     public ClickImage newwp;
-    public PauseMenu pause;
-    public GameObject objectToActivate;
+    public Select pause;
 
     public int xp;
     public int killed;
     private int i;
-    private int a = 2;
+    private int a = 5;
     public int level = 1;
 
     public Text counterText;
@@ -77,8 +76,7 @@ public class XPbar : MonoBehaviour
         if (level == a)
         {
             Debug.Log("incroyable");
-            newwp.Red();
-            a++;
+            a--;
             pause.Pause();
         }
     }
