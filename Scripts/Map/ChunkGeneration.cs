@@ -7,15 +7,17 @@ public class ChunkGeneration : MonoBehaviour
 {
     [SerializeField] int width, height;
     [SerializeField] Tilemap Objectmap, Tilemap, Collidemap;
-    [SerializeField] Tile dirt, grass, stone, water, brick;
+    [SerializeField] Tile dirt, grass, stone, snow, deepWater, shallowWater, brick, obstacle;
     [Range(0,100)]
     [SerializeField] float smoothness;
     [SerializeField] float seed;
     [Range(0,1)]
-    [SerializeField] float waterLevel, grassLevel, dirtLevel;
-    [SerializeField] int numberObjects;
+    [SerializeField] float deepWaterLevel, shallowWaterLevel, grassLevel, dirtLevel, stoneLevel;
+    [SerializeField] int maxObjects;
 
     public float scale = .1f;
+    public int numberObjects;
+    public Vector3Int location;
 
     Cell[,] grid;
 
@@ -24,7 +26,7 @@ public class ChunkGeneration : MonoBehaviour
         seed = Random.Range(-1000000, 1000000);
         Generation();
         BuildStruct(4, 3, brick, grass);
-        BuildObject(brick, grass);
+        BuildObject(obstacle, grass);
     }
 
     private void Update()
@@ -34,7 +36,8 @@ public class ChunkGeneration : MonoBehaviour
             seed = Random.Range(-1000000, 1000000);
             Generation();
             BuildStruct(4, 3, brick, grass);
-            BuildObject(brick, grass);
+            numberObjects = 0;
+            BuildObject(obstacle, grass);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -42,6 +45,29 @@ public class ChunkGeneration : MonoBehaviour
             Collidemap.ClearAllTiles();
             Objectmap.ClearAllTiles();
         }
+        if (numberObjects < maxObjects)
+        {
+            BuildObject(obstacle, grass);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+            location = Objectmap.WorldToCell(mp);
+            location.z = -5;
+            if (Objectmap.GetTile(location))
+            {
+                Debug.Log(location);
+                Debug.Log(Objectmap.GetTile(location));
+                Objectmap.SetTile(location, null);
+            }
+            else 
+            {
+                Debug.Log(location);
+                Debug.Log("no tile");
+            }
+        }
+        
         // GameObject Chunk = GameObject.Find("Chunk");
         // GameObject player = GameObject.Find("MainChar");
         // Vector3 position = player.transform.position;
@@ -83,8 +109,10 @@ public class ChunkGeneration : MonoBehaviour
                 noiseValue -= falloffMap[x, y];
                 bool isGrass = noiseValue < grassLevel;
                 bool isDirt = noiseValue < dirtLevel;
-                bool isWater = noiseValue < waterLevel;
-                Cell cell = new Cell(isGrass, isDirt, isWater);
+                bool isShallowWater = noiseValue < shallowWaterLevel;
+                bool isDeepWater = noiseValue < deepWaterLevel;
+                bool isStone = noiseValue < stoneLevel;
+                Cell cell = new Cell(isGrass, isDirt, isShallowWater, isDeepWater, isStone);
                 grid[x, y] = cell;
             }
         }
@@ -95,9 +123,13 @@ public class ChunkGeneration : MonoBehaviour
             {
                 Cell cell = grid[x, y];
                 
-                if(cell.isWater)
+                if(cell.isDeepWater)
                 {
-                    Collidemap.SetTile(new Vector3Int(x, y, -5), water);
+                    Collidemap.SetTile(new Vector3Int(x, y, -5), deepWater);
+                }
+                else if(cell.isShallowWater)
+                {
+                    Tilemap.SetTile(new Vector3Int(x, y, -5), shallowWater);
                 }
                 else if (cell.isGrass)
                 {
@@ -107,9 +139,13 @@ public class ChunkGeneration : MonoBehaviour
                 {
                     Tilemap.SetTile(new Vector3Int(x, y, -5), dirt);
                 }
-                else
+                else if(cell.isStone)
                 {
                     Tilemap.SetTile(new Vector3Int(x, y, -5), stone);
+                }
+                else
+                {
+                    Tilemap.SetTile(new Vector3Int(x, y, -5), snow);
                 }
             }
         }
@@ -121,7 +157,6 @@ public class ChunkGeneration : MonoBehaviour
     {
         int buildable = 0;
         int surface = largeur * hauteur;
-        Debug.Log(surface);
         while (buildable < surface)
         {
             buildable = 0;
@@ -136,7 +171,6 @@ public class ChunkGeneration : MonoBehaviour
                         if(Tilemap.GetTile(new Vector3Int(randx + x, randy + y, -5)) == support)
                         {
                             buildable = buildable +1; 
-                            Debug.Log(buildable);
                         }
                     }  
                 }
@@ -156,10 +190,9 @@ public class ChunkGeneration : MonoBehaviour
         }
     }
 
-    void BuildObject(Tile material, Tile support)
+    public void BuildObject(Tile material, Tile support)
     {
-        int buildable = 0;
-        while (buildable < numberObjects)
+        while (numberObjects < maxObjects)
         {
             int clear = 0;
             int randx = Random.Range(0, width);
@@ -178,8 +211,9 @@ public class ChunkGeneration : MonoBehaviour
                 }
                 if (clear == 9)
                 {
-                    buildable = buildable + 1;
-                    Objectmap.SetTile(new Vector3Int(randx, randy, -4), material);                     
+                    Debug.Log("object");
+                    numberObjects += 1;
+                    Objectmap.SetTile(new Vector3Int(randx, randy, -5), material);                  
                 }
             }
         }
