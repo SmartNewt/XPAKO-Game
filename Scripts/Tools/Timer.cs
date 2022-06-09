@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeValue = 90;
+    public float timeValue = 0;
+    public float Timefixed;
     public Text timerText;
 
     //Update is called once per frame
     void Update()
     {
-        if (timeValue > 0)
+        if (timeValue >= 0)
         {
-            timeValue -= Time.deltaTime;
+            Timefixed = Mathf.Round(timeValue += Time.deltaTime);
         }
         else
         {

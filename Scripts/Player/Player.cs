@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public DeathManage dm;
 
+    Renderer rend;
+    Color c;
+
     void Awake()
     {
         LoadPlayer();
@@ -38,10 +41,11 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Enemy")
-        {
-            TakeDamage(1);
-        }
+        // if (collisionInfo.collider.CompareTag("Enemy") && currentHealth > 0)
+        //     StartCoroutine("GetInvulnerable");
+        // {
+        //     TakeDamage(1);
+        // }
 
         if (currentHealth == 0 || currentHealth < 0)
         {
@@ -79,4 +83,15 @@ public class Player : MonoBehaviour
         position.z = data.position[2];
         transform.position = position;
     }
+
+    // IEnumerator GetInvulnerable()
+    // {
+    //     Physics2D.IgnoreLayerCollision(6, 7, true);
+    //     c.a = 0.5f;
+    //     rend.material.color = c;
+    //     yield return new WaitForSeconds(1f);
+    //     Physics2D.IgnoreLayerCollision(6, 7, false);
+    //     c.a = 1f;
+    //     rend.material.color = c;
+    // }
 }

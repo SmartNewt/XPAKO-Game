@@ -54,19 +54,16 @@ public class MainCharLifeSys : MonoBehaviour
             if (collisionInfo.gameObject.name == "Speed+(Clone)")
             {
                 PlayerSpeed = PlayerSpeed * 1.1;
-                Debug.Log(PlayerSpeed);
             }
 
             if (collisionInfo.gameObject.name == "Damage+(Clone)")
             {
                 damageWeapon = damageWeapon * 1.1;
-                Debug.Log("damageD" + damageWeapon);
             }
 
             if (collisionInfo.gameObject.name == "SpeedWeapon+(Clone)")
             {
                 speedWeapon = speedWeapon * 0.9;
-                Debug.Log("SpeedWD" + speedWeapon);
             }
         }
 

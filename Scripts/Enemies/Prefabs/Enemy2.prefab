@@ -151,3 +151,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 3
+  xpPrefabs: {fileID: 770323737848156485, guid: 2b787259cc084d04089573d482c61402, type: 3}

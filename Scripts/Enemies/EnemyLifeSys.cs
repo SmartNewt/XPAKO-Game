@@ -6,6 +6,7 @@ public class EnemyLifeSys : MonoBehaviour
 {
     public int hp = 3;
     private int damage;
+    public GameObject xpPrefabs;
     private DeathManage dm;
 
     void Awake()
@@ -29,9 +30,15 @@ public class EnemyLifeSys : MonoBehaviour
 
             if (damage == hp)
             {
+                DropXP();
                 Destroy(gameObject);
                 dm.IncreaseDeaths();
             }
         }
+    }
+
+    private void DropXP()
+    {
+        GameObject XP = Instantiate(xpPrefabs, gameObject.transform.position, transform.rotation);
     }
 }

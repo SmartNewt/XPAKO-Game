@@ -39,16 +39,12 @@ public class XPbar : MonoBehaviour
 
     public void SetMaxXP()
     {
-        slider.maxValue = 100;
-        slider.value = xp;
-
         fill.color = gradient.Evaluate(1f);
     }
 
     public void SetXP()
     {
         slider.value = xp;
-
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
@@ -56,9 +52,9 @@ public class XPbar : MonoBehaviour
     {
         if (i == killed)
         {
-            xp += 5;
             i++;
-            if (xp == 100)
+            xp += 5;
+            if (xp == 100 || xp > 100)
             {
                 xp = 0;
                 level++;
