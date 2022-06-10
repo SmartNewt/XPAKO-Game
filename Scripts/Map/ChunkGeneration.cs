@@ -49,24 +49,24 @@ public class ChunkGeneration : MonoBehaviour
         {
             BuildObject(obstacle, grass);
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
-            location = Objectmap.WorldToCell(mp);
-            location.z = -5;
-            if (Objectmap.GetTile(location))
-            {
-                Debug.Log(location);
-                Debug.Log(Objectmap.GetTile(location));
-                Objectmap.SetTile(location, null);
-            }
-            else 
-            {
-                Debug.Log(location);
-                Debug.Log("no tile");
-            }
-        }
+        //     location = Objectmap.WorldToCell(mp);
+        //     location.z = -5;
+        //     if (Objectmap.GetTile(location))
+        //     {
+        //         Debug.Log(location);
+        //         Debug.Log(Objectmap.GetTile(location));
+        //         Objectmap.SetTile(location, null);
+        //     }
+        //     else 
+        //     {
+        //         Debug.Log(location);
+        //         Debug.Log("no tile");
+        //     }
+        // }
         
         // GameObject Chunk = GameObject.Find("Chunk");
         // GameObject player = GameObject.Find("MainChar");
@@ -168,7 +168,7 @@ public class ChunkGeneration : MonoBehaviour
                 {
                     for(int y = 0; y < hauteur; y++)
                     {
-                        if(Tilemap.GetTile(new Vector3Int(randx + x, randy + y, -5)) == support)
+                        if(Tilemap.GetTile(new Vector3Int(randx + x, randy + y, -5)) == support && Objectmap.GetTile(new Vector3Int(randx + x, randy + y, -5)) == material)
                         {
                             buildable = buildable +1; 
                         }
