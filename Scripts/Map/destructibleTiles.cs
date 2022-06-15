@@ -11,15 +11,9 @@ public class destructibleTiles : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Objectmap = GetComponent<Tilemap>();
-        
+        Objectmap = GetComponent<Tilemap>();  
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Bullet"))
