@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class PlayerXP : MonoBehaviour
 {
     public XPbar xpmanage;
+    XPbar xpbar;
+    
+    void Start()
+    {
+        xpbar = xpmanage.GetComponent<XPbar>();
+    }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "XP")
         {
-            xpmanage.xp += 2;
-            Debug.Log(xpmanage.xp);
+            xpbar.xp += 2;
         }
     }
 }

@@ -10,7 +10,6 @@ public class XPbar : MonoBehaviour
     public Image fill;
     public DeathManage dm;
     public Player player;
-    public ClickImage newwp;
     public Select pause;
 
     public int xp;
@@ -28,7 +27,7 @@ public class XPbar : MonoBehaviour
         SetMaxXP();
     }
 
-    public void Update()
+    void Update()
     {
         killed = dm.deaths;
         GainXP();
@@ -44,7 +43,9 @@ public class XPbar : MonoBehaviour
 
     public void SetXP()
     {
+        Debug.Log(xp);
         slider.value = xp;
+        Debug.Log(slider.value);
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
@@ -53,7 +54,6 @@ public class XPbar : MonoBehaviour
         if (i == killed)
         {
             i++;
-            xp += 5;
             if (xp == 100 || xp > 100)
             {
                 xp = 0;
