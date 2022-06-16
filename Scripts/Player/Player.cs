@@ -5,22 +5,27 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int maxHealth;
-    public int Armor;
     public int level;
-    public int BulletSpeed;
-    public int CoolDown;
     public int currentHealth;
     public int killed;
+
+    public double PlayerSpeed = 50;
+
+    public GameObject gameManager;
     public HealthBar healthBar;
     public DeathManage dm;
+    PlayerStatus PS;
+    public DefineStatut ds;
 
     void Awake()
     {
+        ds = GameObject.FindObjectOfType<DefineStatut>();
         LoadPlayer();
         dm = GameObject.FindObjectOfType<DeathManage>();
-        Debug.Log(dm.deaths);
+        maxHealth = ds.hp;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        PS = gameManager.GetComponent<PlayerStatus>();
     }
 
     private void Start() { }
@@ -31,6 +36,25 @@ public class Player : MonoBehaviour
         healthBar.SetHealth(currentHealth);
     }
 
+    void verifBonus(GameObject collision)
+    {
+        if (collision.name == "Speed+(Clone)")
+        {
+            PS.countS++;
+            PS.UpBonusSpeed();
+        }
+
+        if (collision.name == "Damage+(Clone)")
+        {
+            PS.countD++;
+        }
+
+        if (collision.name == "SpeedWeapon+(Clone)")
+        {
+            PS.countSW++;
+        }
+    }
+
     void OnApplicationQuit()
     {
         SaveSystem.SavePlayer(this);
@@ -38,19 +62,18 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        // if (collisionInfo.collider.CompareTag("Enemy") && currentHealth > 0)
-        //     StartCoroutine("GetInvulnerable");
-        // {
-        //     TakeDamage(1);
-        // }
+        if (collisionInfo.collider.CompareTag("Enemy") && currentHealth > 0)
+        {
+            TakeDamage(1);
+        }
 
         if (currentHealth == 0 || currentHealth < 0)
         {
             currentHealth = 0;
         }
-        if (currentHealth > 101)
+        if (currentHealth > maxHealth+1)
         {
-            currentHealth = 100;
+            currentHealth = maxHealth;
         }
     }
 

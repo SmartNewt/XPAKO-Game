@@ -193,7 +193,6 @@ public class ChunkGeneration : MonoBehaviour
     {
         int buildable = 0;
         int surface = largeur * hauteur;
-        Debug.Log(surface);
         while (buildable < surface)
         {
             buildable = 0;
@@ -208,7 +207,6 @@ public class ChunkGeneration : MonoBehaviour
                         if (Tilemap.GetTile(new Vector3Int(randx + x, randy + y, -5)) == support)
                         {
                             buildable = buildable + 1;
-                            Debug.Log(buildable);
                         }
                     }
                 }
@@ -248,7 +246,6 @@ public class ChunkGeneration : MonoBehaviour
                 }
                 if (clear == 9)
                 {
-                    Debug.Log("object");
                     numberObjects += 1;
                     Objectmap.SetTile(new Vector3Int(randx, randy, -5), material);
                 }

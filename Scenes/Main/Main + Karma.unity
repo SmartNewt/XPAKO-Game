@@ -3187,12 +3187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  Armor: 1
   level: 1
-  BulletSpeed: 0
-  CoolDown: 1
   currentHealth: 100
   killed: 0
+  PlayerSpeed: 50
+  gameManager: {fileID: 2068367767}
   healthBar: {fileID: 247038334}
   dm: {fileID: 2068367770}
 --- !u!114 &914623357
@@ -5516,7 +5515,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7203125, y: 1}
+    m_SensorSize: {x: 1.7828125, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6534,6 +6533,8 @@ GameObject:
   - component: {fileID: 2068367769}
   - component: {fileID: 2068367770}
   - component: {fileID: 2068367771}
+  - component: {fileID: 2068367772}
+  - component: {fileID: 2068367773}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6595,6 +6596,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63caf659be459374082308d1fd2b64f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2068367772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068367767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6de30bb8a5d1429760b4d315a9e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 914623347}
+  countS: 0
+  coefSpeed: 0
+  countSW: 0
+  countD: 0
+  hp: 0
+  level: 0
+  dead: 0
+  weapon1: {fileID: 0}
+  weapon2: {fileID: 0}
+  weapon3: {fileID: 0}
+  weapon4: {fileID: 0}
+  passif1: {fileID: 0}
+  passif2: {fileID: 0}
+  passif3: {fileID: 0}
+  passif4: {fileID: 0}
+  actif: {fileID: 0}
+--- !u!114 &2068367773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068367767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae54b02b37301f40886406b18b6710c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 914623349}
 --- !u!1 &2075153973
 GameObject:
   m_ObjectHideFlags: 0

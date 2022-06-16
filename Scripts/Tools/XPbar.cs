@@ -43,9 +43,7 @@ public class XPbar : MonoBehaviour
 
     public void SetXP()
     {
-        Debug.Log(xp);
         slider.value = xp;
-        Debug.Log(slider.value);
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
