@@ -9,10 +9,13 @@ public class XPbar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     public DeathManage dm;
+    public Player player;
+    public Select pause;
 
     public int xp;
     public int killed;
-    public int i;
+    private int i;
+    private int a = 5;
     public int level = 1;
 
     public Text counterText;
@@ -20,29 +23,29 @@ public class XPbar : MonoBehaviour
     void Awake()
     {
         dm = GameObject.FindObjectOfType<DeathManage>();
+        player = GameObject.FindObjectOfType<Player>();
         SetMaxXP();
     }
 
-    public void Update()
+    void Update()
     {
         killed = dm.deaths;
         GainXP();
         SetXP();
+        NewStep();
         counterText.text = level.ToString();
     }
 
     public void SetMaxXP()
     {
-        slider.maxValue = 100;
-        slider.value = xp;
-
         fill.color = gradient.Evaluate(1f);
     }
 
     public void SetXP()
     {
+        Debug.Log(xp);
         slider.value = xp;
-
+        Debug.Log(slider.value);
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
@@ -50,17 +53,27 @@ public class XPbar : MonoBehaviour
     {
         if (i == killed)
         {
-            xp += 5;
             i++;
-            if (xp == 100)
+            if (xp == 100 || xp > 100)
             {
                 xp = 0;
                 level++;
+                player.currentHealth += 25;
             }
         }
         if (i < killed)
         {
             i = killed + 1;
+        }
+    }
+
+    public void NewStep()
+    {
+        if (level == a)
+        {
+            Debug.Log("incroyable");
+            a--;
+            pause.Pause();
         }
     }
 }

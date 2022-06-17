@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
-    public float playerSpeed = 5f;
-
     public Rigidbody2D rb;
-    public Camera cam;
 
+    private double playerSpeed;
     Vector2 movement;
-    Vector2 mousePos;
+
+    void Start()
+    {
+        MainCharLifeSys MCL = gameObject.GetComponent<MainCharLifeSys>();
+        playerSpeed = MCL.PlayerSpeed;
+    }
 
     // Update is called once per frame
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * playerSpeed * Time.fixedDeltaTime);
+        float PS = (float)playerSpeed;
 
-        Vector2 lookDir = mousePos - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        rb.MovePosition(rb.position + movement * PS * Time.fixedDeltaTime);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Physics2D.IgnoreCollision(
+                gameObject.GetComponent<Collider2D>(),
+                collision.gameObject.GetComponent<Collider2D>()
+            );
+        }
     }
 }
