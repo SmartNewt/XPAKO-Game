@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class EnemyLifeSys : MonoBehaviour
 {
-    public int hp = 3;
-    private int damage;
+    public int hp;
+    public int damage;
     public GameObject xpPrefabs;
     private DeathManage dm;
+    public DefineStatut ds;
 
     void Awake()
     {
+        ds = GameObject.FindObjectOfType<DefineStatut>();
         dm = GameObject.FindObjectOfType<DeathManage>();
+        damage = ds.countD;
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
@@ -26,9 +29,9 @@ public class EnemyLifeSys : MonoBehaviour
 
         if (collisionInfo.gameObject.tag == "Bullet")
         {
-            damage++;
-
-            if (damage == hp)
+            Debug.Log(damage);
+            hp -= damage;
+            if (hp == 0 || hp < 0)
             {
                 DropXP();
                 Destroy(gameObject);

@@ -8,11 +8,12 @@ public class PlayerMove : MonoBehaviour
 
     private double playerSpeed;
     Vector2 movement;
+    public DefineStatut ds;
 
     void Start()
     {
-        MainCharLifeSys MCL = gameObject.GetComponent<MainCharLifeSys>();
-        playerSpeed = MCL.PlayerSpeed;
+        ds = GameObject.FindObjectOfType<DefineStatut>();
+        playerSpeed = ds.countS;
     }
 
     // Update is called once per frame
@@ -24,9 +25,9 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float PS = (float)playerSpeed;
+        float PSE = (float)playerSpeed;
 
-        rb.MovePosition(rb.position + movement * PS * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * PSE * Time.fixedDeltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
