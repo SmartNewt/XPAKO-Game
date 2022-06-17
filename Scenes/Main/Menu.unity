@@ -2001,6 +2001,7 @@ MonoBehaviour:
   countSW: 0
   countD: 1
   hp: 100
+  armor: 0
 --- !u!1 &530089635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,6 +2781,7 @@ MonoBehaviour:
   countSW: 0
   countD: 2
   hp: 150
+  armor: 2
 --- !u!1 &870114522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,6 +3155,7 @@ MonoBehaviour:
   countSW: 0
   countD: 2
   hp: 75
+  armor: -1
 --- !u!1 &886879245
 GameObject:
   m_ObjectHideFlags: 0
@@ -3775,6 +3778,7 @@ MonoBehaviour:
   countSW: 0
   countD: 2
   hp: 100
+  armor: 0
 --- !u!1 &1085648695
 GameObject:
   m_ObjectHideFlags: 0
@@ -5061,6 +5065,7 @@ MonoBehaviour:
   countSW: 0
   countD: 7
   hp: 200
+  armor: 0
 --- !u!1 &1535770683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5843,6 +5848,7 @@ MonoBehaviour:
   countSW: 0
   countD: 3
   hp: 100
+  armor: 0
 --- !u!1 &1716285665
 GameObject:
   m_ObjectHideFlags: 0
@@ -7572,3 +7578,4 @@ MonoBehaviour:
   countSW: 0
   countD: 2
   hp: 50
+  armor: 0

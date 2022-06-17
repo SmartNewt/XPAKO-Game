@@ -29,7 +29,6 @@ public class EnemyLifeSys : MonoBehaviour
 
         if (collisionInfo.gameObject.tag == "Bullet")
         {
-            Debug.Log(damage);
             hp -= damage;
             if (hp == 0 || hp < 0)
             {
