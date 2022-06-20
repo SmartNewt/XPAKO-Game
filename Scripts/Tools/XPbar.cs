@@ -15,7 +15,7 @@ public class XPbar : MonoBehaviour
     public int xp;
     public int killed;
     private int i;
-    private int a = 5;
+    private int a = 2;
     public int level = 1;
 
     public Text counterText;
@@ -52,6 +52,7 @@ public class XPbar : MonoBehaviour
         if (i == killed)
         {
             i++;
+            xp+=20;
             if (xp == 100 || xp > 100)
             {
                 xp = 0;
@@ -69,7 +70,6 @@ public class XPbar : MonoBehaviour
     {
         if (level == a)
         {
-            Debug.Log("incroyable");
             a--;
             pause.Pause();
         }

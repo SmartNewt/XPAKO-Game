@@ -9,4 +9,5 @@ public class DefineStatut : MonoBehaviour
     public float countSW;
     public int countD;
     public int hp;
+    public int armor;
 }

@@ -64,14 +64,25 @@ public class Player : MonoBehaviour
     {
         if (collisionInfo.collider.CompareTag("Enemy") && currentHealth > 0)
         {
-            TakeDamage(1);
+            if (ds.armor == 2)
+            {
+                TakeDamage(1);
+            }
+            if (ds.armor == -1)
+            {
+                TakeDamage(3);
+            }
+            if (ds.armor == 0)
+            {
+                TakeDamage(2);
+            }
         }
 
         if (currentHealth == 0 || currentHealth < 0)
         {
             currentHealth = 0;
         }
-        if (currentHealth > maxHealth+1)
+        if (currentHealth > maxHealth + 1)
         {
             currentHealth = maxHealth;
         }
