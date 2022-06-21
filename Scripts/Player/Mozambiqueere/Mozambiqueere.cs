@@ -6,32 +6,40 @@ public class Mozambiqueere : MonoBehaviour
 {
     public GameObject firePoint;
     public GameObject bulletPrefab;
-    public Camera cam;
-    public GameObject player;
+    public GameObject[] cam;
+    public GameObject[] player;
     public int nbBullets;
+
+    public WeaponStats WS;
 
     List<GameObject> target = new List<GameObject>();
 
+    private int tmp;
+    // private int currentLevel = 1;
+    private int baseDamage;
+    // private int nbBullet = 1;
+    private FindClosest FC;
+
     private double fireSpeed;
     private double bulletForce;
-    private int tmp;
-    private int index = 0;
 
     void Start()
     {
         WeaponStats WS = gameObject.GetComponent<WeaponStats>();
         fireSpeed = WS.fireRate;
         bulletForce = WS.bulletSpeed;
+        baseDamage = WS.damage;
+
+        player = GameObject.FindGameObjectsWithTag("Player");
+        cam = GameObject.FindGameObjectsWithTag("MainCamera");
+        FC = player[0].GetComponent<FindClosest>();
     }
 
     void Update()
     {
-        SetTarget();
-        if (target[index] != null)
-        {
-            Aiming();
-            Shoot();
-        }
+        Aiming();
+        Shoot();
+        LevelUp();
 
         if (player == null)
         {
@@ -39,35 +47,14 @@ public class Mozambiqueere : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D colliderInfo)
-    {
-        if (colliderInfo.gameObject.tag == "Player" || colliderInfo.gameObject.tag == "Bullet")
-        {
-            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), colliderInfo.gameObject.GetComponent<Collider2D>());
-        }
-        if (colliderInfo.gameObject.tag == "Enemy")
-        {
-            target.Add(colliderInfo.gameObject);
-            Debug.Log("ninporte quoi jsp");
-        }
-    }
-
-    int SetTarget()
-    {
-        while (target[index] == null)
-        {
-            index++;
-        }
-        return index;
-    }
-
     void Aiming()
     {
+
         for (int i = 0; i < nbBullets; i++)
         {
             Rigidbody2D rb = firePoint.GetComponent<Rigidbody2D>();
-            Vector2 lookDir = target[index].transform.position - firePoint.transform.position * Random.Range(1f, 2f);
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+            Vector2 lookDir = FC.FindClosestEnemy().transform.position - firePoint.transform.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) *((Mathf.Rad2Deg - 90f) * Random.Range(1f, 2f));
             rb.rotation = angle;
         }
     }
@@ -78,14 +65,14 @@ public class Mozambiqueere : MonoBehaviour
 
         if (tmp == fireSpeed)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < nbBullets; i++)
             {
-                GameObject bullet = Instantiate(
+                GameObject Bullet = Instantiate(
                     bulletPrefab,
                     firePoint.transform.position,
                     firePoint.transform.rotation
                 );
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                Rigidbody2D rb = Bullet.GetComponent<Rigidbody2D>();
                 rb.AddForce(firePoint.transform.up * BFtmp, ForceMode2D.Impulse);
             }
             tmp = 0;
@@ -94,5 +81,21 @@ public class Mozambiqueere : MonoBehaviour
         {
             tmp++;
         }
+    }
+    void LevelUp ()
+    {
+        // if (currentLevel != WS.level)
+        // {
+        //     currentLevel = WS.level;
+        //     WS.damage = baseDamage + currentLevel;
+
+        //     if ((currentLevel % 4) == 0)
+        //     {
+        //         if ((currentLevel / 4) <= 3)
+        //         {
+        //             nbBullet = 1 + (currentLevel/4);
+        //         }
+        //     }
+        // }
     }
 }
