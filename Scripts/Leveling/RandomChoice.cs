@@ -28,12 +28,12 @@ public class RandomChoice : MonoBehaviour
             levelChoice[i] = transform.GetChild(i).gameObject;
         }
 
-        for (int n = 0; n < 10; n++) //  Populate list
+        nbchoice = transform.childCount;
+
+        for (int n = 0; n < nbchoice; n++) //  Populate list
         {
             list.Add(n);
         }
-
-        nbchoice = transform.childCount;
 
         SetFalse();
 
@@ -45,8 +45,6 @@ public class RandomChoice : MonoBehaviour
 
         pos3.x = 347;
         pos3.y = 0;
-
-        randomnb();
     }
 
     private void Update()
@@ -68,39 +66,24 @@ public class RandomChoice : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                Debug.Log(i + "Le chiffre d'itération");
-                int randomNumber = Random.Range(1, 3);
-                levelChoice[randomNumber].SetActive(true);
-                Debug.Log(randomNumber + "le chiffre aléatoire");
+                int index = Random.Range(0, list.Count); //  Pick random element from the list
+                int j = list[index]; //  i = the number that was randomly picked
+                list.RemoveAt(index); //  Remove chosen element
+                levelChoice[j].SetActive(true);
                 if (i == 0)
                 {
-                    levelChoice[randomNumber].transform.localPosition = pos1;
-                    Debug.Log("1 case");
+                    levelChoice[j].transform.localPosition = pos1;
                 }
                 if (i == 1)
                 {
-                    levelChoice[randomNumber].transform.localPosition = pos2;
-                    Debug.Log("2 case");
+                    levelChoice[j].transform.localPosition = pos2;
                 }
                 if (i == 2)
                 {
-                    levelChoice[randomNumber].transform.localPosition = pos3;
-                    Debug.Log("3 case");
+                    levelChoice[j].transform.localPosition = pos3;
                 }
                 a++;
             }
-        }
-    }
-
-    public void randomnb()
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            int index = Random.Range(0, list.Count - 1); //  Pick random element from the list
-            int j = list[index]; //  i = the number that was randomly picked
-            list.RemoveAt(index); //  Remove chosen element
-            //  Loop lines 10-13 as many times as needed
-            Debug.Log(j);
         }
     }
 }

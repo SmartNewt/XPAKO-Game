@@ -11,8 +11,8 @@ public class PlayerStatus : MonoBehaviour
     public float countS;
     public float coefSpeed;
     public float countSW;
-    public int countD;
-    public int hp;
+    public float countD;
+    public float hp;
 
     void Start()
     {

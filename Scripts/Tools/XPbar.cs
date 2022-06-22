@@ -57,7 +57,6 @@ public class XPbar : MonoBehaviour
             {
                 xp = 0;
                 level++;
-                player.currentHealth += 25;
             }
         }
         if (i < killed)

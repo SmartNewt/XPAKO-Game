@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyLifeSys : MonoBehaviour
 {
-    public int hp;
-    public int damage;
+    public float hp;
+    public float damage;
+    private float damagetaken;
     public GameObject xpPrefabs;
     private DeathManage dm;
     public DefineStatut ds;
@@ -14,28 +15,28 @@ public class EnemyLifeSys : MonoBehaviour
     {
         ds = GameObject.FindObjectOfType<DefineStatut>();
         dm = GameObject.FindObjectOfType<DeathManage>();
-        damage = ds.countD;
+    }
+
+    void Update()
+    {
+        damagetaken = ds.countD;
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Player" || collisionInfo.gameObject.tag == "Bullet")
+        if (collisionInfo.gameObject.tag == "Bullet")
         {
             Physics2D.IgnoreCollision(
                 gameObject.GetComponent<Collider2D>(),
                 collisionInfo.gameObject.GetComponent<Collider2D>()
             );
+            hp -= damagetaken;
         }
-
-        if (collisionInfo.gameObject.tag == "Bullet")
+        if (hp == 0 || hp < 0)
         {
-            hp -= damage;
-            if (hp == 0 || hp < 0)
-            {
-                DropXP();
-                Destroy(gameObject);
-                dm.IncreaseDeaths();
-            }
+            DropXP();
+            Destroy(gameObject);
+            dm.IncreaseDeaths();
         }
     }
 

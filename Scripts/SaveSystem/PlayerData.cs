@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int health;
+    public float health;
     public int level;
     public int killed;
     public float[] position;

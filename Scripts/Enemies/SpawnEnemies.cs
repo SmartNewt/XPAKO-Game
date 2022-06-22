@@ -33,7 +33,7 @@ public class SpawnEnemies : MonoBehaviour
         {
             if (tmp == TimeForSpawn)
             {
-                if (Timefixed >= 60 && spawn == true)
+                if (Timefixed >= 20  && spawn == true)
                 {
                     int randEnemy = Random.Range(0, enemyPrefabs.Length);
 
