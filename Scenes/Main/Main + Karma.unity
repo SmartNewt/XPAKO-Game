@@ -1502,7 +1502,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2068367774}
         m_TargetAssemblyTypeName: ObjectEffect, Assembly-CSharp
-        m_MethodName: LevelDown
+        m_MethodName: LvlDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8697,7 +8697,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2068367767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ab0f2141842674cb1144e60ba1ea09, type: 3}
+  m_Script: {fileID: 11500000, guid: e74e36f8be0360b4cacda752cf39168b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ds: {fileID: 0}
@@ -8874,7 +8874,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2068367774}
         m_TargetAssemblyTypeName: ObjectEffect, Assembly-CSharp
-        m_MethodName: Loiz
+        m_MethodName: loiz
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
