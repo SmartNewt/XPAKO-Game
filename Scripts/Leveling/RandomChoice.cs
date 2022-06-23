@@ -8,6 +8,7 @@ public class RandomChoice : MonoBehaviour
     List<int> list = new List<int>(); //  Declare list
     private int nbchoice;
     public XPbar xpb;
+    public Select slct;
     private int a = 2;
 
     private Vector2 pos1;
@@ -17,6 +18,7 @@ public class RandomChoice : MonoBehaviour
     public void Awake()
     {
         xpb = GameObject.FindObjectOfType<XPbar>();
+        slct = GameObject.FindObjectOfType<Select>();
     }
 
     public void Start()
@@ -50,9 +52,10 @@ public class RandomChoice : MonoBehaviour
     private void Update()
     {
         Randomnumber();
+        CheckResume();
     }
 
-    private void SetFalse()
+    public void SetFalse()
     {
         foreach (GameObject go in levelChoice)
         {
@@ -84,6 +87,14 @@ public class RandomChoice : MonoBehaviour
                 }
                 a++;
             }
+        }
+    }
+
+    public void CheckResume()
+    {
+        if (slct.GameIsPaused == false)
+        {
+            SetFalse();
         }
     }
 }
