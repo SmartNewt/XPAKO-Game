@@ -21,4 +21,3 @@ public class Select : MonoBehaviour
         GameIsPaused = true;
     }
 }
-

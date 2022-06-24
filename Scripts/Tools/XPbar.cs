@@ -52,12 +52,11 @@ public class XPbar : MonoBehaviour
         if (i == killed)
         {
             i++;
-            xp+=20;
+            xp+=25;
             if (xp == 100 || xp > 100)
             {
                 xp = 0;
                 level++;
-                player.currentHealth += 25;
             }
         }
         if (i < killed)
@@ -70,7 +69,7 @@ public class XPbar : MonoBehaviour
     {
         if (level == a)
         {
-            a--;
+            a++;
             pause.Pause();
         }
     }

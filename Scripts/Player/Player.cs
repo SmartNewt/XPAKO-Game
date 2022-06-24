@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int maxHealth;
+    public float maxHealth;
     public int level;
-    public int currentHealth;
+    public float currentHealth;
     public int killed;
+    private float damage;
 
     public double PlayerSpeed = 50;
 
@@ -16,10 +17,13 @@ public class Player : MonoBehaviour
     public DeathManage dm;
     PlayerStatus PS;
     public DefineStatut ds;
+    public ObjectEffect oe;
+    public EnemyLifeSys els;
 
     void Awake()
     {
         ds = GameObject.FindObjectOfType<DefineStatut>();
+        oe = GameObject.FindObjectOfType<ObjectEffect>();
         LoadPlayer();
         dm = GameObject.FindObjectOfType<DeathManage>();
         maxHealth = ds.hp;
@@ -34,6 +38,7 @@ public class Player : MonoBehaviour
     {
         killed = dm.deaths;
         healthBar.SetHealth(currentHealth);
+        maxHealth = ds.hp;
     }
 
     void verifBonus(GameObject collision)
@@ -62,20 +67,12 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
+        els = collisionInfo.gameObject.GetComponent<EnemyLifeSys>();
         if (collisionInfo.collider.CompareTag("Enemy") && currentHealth > 0)
         {
-            if (ds.armor == 2)
-            {
-                TakeDamage(1);
-            }
-            if (ds.armor == -1)
-            {
-                TakeDamage(3);
-            }
-            if (ds.armor == 0)
-            {
-                TakeDamage(2);
-            }
+            TakeDamage();
+            els.hp -= oe.epine;
+            Debug.Log(oe.epine);
         }
 
         if (currentHealth == 0 || currentHealth < 0)
@@ -88,10 +85,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    void TakeDamage()
     {
+        damage = els.damage;
+        damage -= ds.armor;
+        Debug.Log(damage);
         currentHealth -= damage;
-
         healthBar.SetHealth(currentHealth);
     }
 
