@@ -1022,7 +1022,7 @@ RectTransform:
   m_GameObject: {fileID: 247038332}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 986418604}
@@ -1033,7 +1033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 458, y: 281}
+  m_AnchoredPosition: {x: 458.0011, y: 281}
   m_SizeDelta: {x: 169.8098, y: 51.403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &247038334
@@ -3184,7 +3184,6 @@ GameObject:
   - component: {fileID: 914623353}
   - component: {fileID: 914623356}
   - component: {fileID: 914623357}
-  - component: {fileID: 914623358}
   m_Layer: 0
   m_Name: MainChar
   m_TagString: Player
@@ -3364,18 +3363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpmanage: {fileID: 1205726849}
---- !u!114 &914623358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 914623347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70df1a399daee8749b5b9aff9534406b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &924474956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5788,7 +5775,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.1749312, y: 1}
+    m_SensorSize: {x: 1.0275482, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
