@@ -52,7 +52,6 @@ public class RandomChoice : MonoBehaviour
     private void Update()
     {
         Randomnumber();
-        CheckResume();
     }
 
     public void SetFalse()
@@ -67,6 +66,7 @@ public class RandomChoice : MonoBehaviour
     {
         if (xpb.level == a)
         {
+            SetFalse();
             for (int i = 0; i < 3; i++)
             {
                 int index = Random.Range(0, list.Count); //  Pick random element from the list
@@ -87,14 +87,6 @@ public class RandomChoice : MonoBehaviour
                 }
                 a++;
             }
-        }
-    }
-
-    public void CheckResume()
-    {
-        if (slct.GameIsPaused == false)
-        {
-            SetFalse();
         }
     }
 }
